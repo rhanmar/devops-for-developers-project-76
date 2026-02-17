@@ -20,11 +20,18 @@
       become: true
       tags: setup
 
+    - name: create .env-file
+      ansible.builtin.template:
+        src: files/redmine/env.j2
+        dest: .env
+      tags: [deploy, setup]
+
     - name: run redmine
       community.docker.docker_container:
         name: redmine-app
         image: redmine:latest
         state: started
         ports: "{{redmine_port}}:3000"
+        env_file: .env
       become: true
-      tags: redmine
+      tags: deploy

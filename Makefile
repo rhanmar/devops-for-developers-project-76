@@ -7,8 +7,14 @@ setup: install-deps
 install-deps:
 	ansible-galaxy install -r requirements.yml
 
-edit-vault:
-	ansible-vault edit group_vars/all/vault.yml
+edit-vault-all:
+	EDITOR=nano ansible-vault edit group_vars/all/vault.yml --vault-password-file ./group_vars/.vault-pass
 
-redmine: install-deps
-	ansible-playbook playbook.yml -i inventory.ini -t redmine --vault-password-file ./group_vars/.vault-pass
+edit-vault-webservers:
+	EDITOR=nano ansible-vault edit group_vars/webservers/vault.yml --vault-password-file ./group_vars/.vault-pass
+
+deploy: install-deps
+	ansible-playbook playbook.yml -i inventory.ini -t deploy --vault-password-file ./group_vars/.vault-pass
+
+run-local:
+	docker run --env-file .env redmine
