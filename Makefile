@@ -9,3 +9,6 @@ install-deps:
 
 edit-vault:
 	ansible-vault edit group_vars/all/vault.yml
+
+redmine: install-deps
+	ansible-playbook playbook.yml -i inventory.ini -t redmine --vault-password-file ./group_vars/.vault-pass

@@ -1,5 +1,8 @@
 - hosts: all
 
+  vars:
+    redmine_port: 8082
+
   tasks:
     - name: ping yc
       ansible.builtin.ping:
@@ -16,3 +19,12 @@
         name: geerlingguy.docker
       become: true
       tags: setup
+
+    - name: run redmine
+      community.docker.docker_container:
+        name: redmine-app
+        image: redmine:latest
+        state: started
+        ports: "{{redmine_port}}:3000"
+      become: true
+      tags: redmine
