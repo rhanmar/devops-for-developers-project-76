@@ -1,0 +1,18 @@
+- hosts: all
+
+  tasks:
+    - name: ping yc
+      ansible.builtin.ping:
+      tags: check
+
+    - name: install pip
+      import_role:
+        name: geerlingguy.pip
+      become: true
+      tags: setup
+
+    - name: install docker
+      import_role:
+        name: geerlingguy.docker
+      become: true
+      tags: setup
