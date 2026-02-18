@@ -1,8 +1,5 @@
 - hosts: all
 
-  vars:
-    redmine_port: 8082
-
   tasks:
     - name: ping yc
       ansible.builtin.ping:
@@ -35,3 +32,13 @@
         env_file: .env
       become: true
       tags: deploy
+
+#####
+
+- hosts: webservers
+  tasks:
+    - name: install Datadog Agent
+      import_role:
+        name: datadog.dd.agent
+      become: true
+      tags: datadog

@@ -16,5 +16,8 @@ edit-vault-webservers:
 deploy: install-deps
 	ansible-playbook playbook.yml -i inventory.ini -t deploy --vault-password-file ./group_vars/.vault-pass
 
+datadog: install-deps
+	ansible-playbook playbook.yml -i inventory.ini -t datadog --vault-password-file ./group_vars/.vault-pass
+
 run-local:
 	docker run --env-file .env redmine
