@@ -5,6 +5,11 @@
       ansible.builtin.apt:
         update_cache: true
 
+    - name: install python deps
+      ansible.builtin.pip:
+        name:
+          - requests
+
   tasks:
     - name: ping yc
       ansible.builtin.ping:
