@@ -35,7 +35,7 @@
         state: started
         ports: "{{redmine_port}}:3000"
         env_file: .env
-      become: true
+        restart_policy: always
       tags: deploy
 
 #####
