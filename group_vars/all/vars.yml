@@ -1,0 +1,2 @@
+redmine_port: 8082
+ansible_user: "ovchinnikovdk-profile"

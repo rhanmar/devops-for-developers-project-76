@@ -19,7 +19,7 @@
 
     - name: create .env-file
       ansible.builtin.template:
-        src: files/redmine/env.j2
+        src: env.j2
         dest: .env
       tags: [deploy, setup]
 

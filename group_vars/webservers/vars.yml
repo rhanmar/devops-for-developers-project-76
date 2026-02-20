@@ -1,6 +1,4 @@
-redmine_port: 8082
-
-datadog_api_key: "{{ datadog_api_key }}"
+datadog_api_key: "{{ vault_datadog_api_key }}"
 datadog_site: us5.datadoghq.com
 datadog_checks:
   http_check:
