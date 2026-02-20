@@ -8,7 +8,7 @@ install-deps:
 	ansible-galaxy install -r requirements.yml
 
 edit-vault-all:
-	EDITOR=nano ansible-vault edit group_vars/all/vault.yml --vault-password-file ./group_vars/.vault-pass
+	EDITOR=nano ansible-vault edit group_vars/webservers/vault.yml --vault-password-file ./group_vars/.vault-pass
 
 deploy: install-deps
 	ansible-playbook playbook.yml -i inventory.ini -t deploy --vault-password-file ./group_vars/.vault-pass
