@@ -1,4 +1,5 @@
-- hosts: all
+- name: App deploy
+  hosts: all
 
   pre_tasks:
     - name: Update apt cache
@@ -31,6 +32,7 @@
       ansible.builtin.template:
         src: env.j2
         dest: .env
+        mode: "0644"
       tags: [deploy, setup]
 
     - name: Run redmine
@@ -38,14 +40,15 @@
         name: redmine-app
         image: redmine:latest
         state: started
-        ports: "{{redmine_port}}:3000"
+        ports: "{{ redmine_port }}:3000"
         env_file: .env
         restart_policy: always
       tags: deploy
 
 #####
 
-- hosts: webservers
+- name: Datadog deploy
+  hosts: webservers
   tasks:
     - name: Install Datadog Agent
       ansible.builtin.import_role:
